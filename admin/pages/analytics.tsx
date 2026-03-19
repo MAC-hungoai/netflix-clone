@@ -9,11 +9,10 @@ import {
   StarOutlined,
   FireOutlined,
 } from '@ant-design/icons';
-import axios from 'axios';
 import AdminLayout from '../components/AdminLayout';
+import api from '../lib/api';
 
 const { Text } = Typography;
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 type Granularity = 'day' | 'month';
 
@@ -58,7 +57,7 @@ const LINE_SERIES: Array<{ key: SeriesKey; label: string; color: string }> = [
   { key: 'views', label: 'Lượt xem', color: '#e50914' },
   { key: 'likes', label: 'Lượt tim', color: '#fa8c16' },
   { key: 'ratingStars', label: 'Sao đánh giá', color: '#1677ff' },
-  { key: 'comments', label: 'Binh luan', color: '#52c41a' },
+  { key: 'comments', label: 'Bình luận', color: '#52c41a' },
 ];
 
 const numberFormatter = new Intl.NumberFormat('vi-VN');
@@ -192,7 +191,7 @@ const AnalyticsPage: React.FC = () => {
       try {
         setLoading(true);
         const limit = granularity === 'month' ? 12 : 30;
-        const response = await axios.get<AnalyticsResponse>(`${API_URL}/api/analytics`, {
+        const response = await api.get<AnalyticsResponse>('/api/analytics', {
           params: { granularity, limit },
         });
 

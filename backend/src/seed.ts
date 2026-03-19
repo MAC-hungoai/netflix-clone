@@ -15,7 +15,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder1.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'hai', 'hot-2024'],
   },
   {
@@ -32,7 +33,8 @@ const movies = [
     language: ['Tiếng Hàn'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder2.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['kinh-di', 'han-quoc', 'hot-2024'],
   },
   {
@@ -49,7 +51,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder3.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'gia-dinh', 'lat-mat'],
   },
   {
@@ -66,7 +69,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder4.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'tinh-cam', 'tran-thanh'],
   },
   {
@@ -83,7 +87,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder5.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'lich-su', 'chien-tranh'],
   },
   {
@@ -100,7 +105,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder6.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'lich-su'],
   },
   {
@@ -117,7 +123,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder7.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['marvel', 'avengers', 'blockbuster'],
   },
   {
@@ -134,7 +141,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder8.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'hai', 'gia-dinh'],
   },
   {
@@ -151,7 +159,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder9.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'tam-ly'],
   },
   {
@@ -168,7 +177,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder10.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'hanh-dong'],
   },
   {
@@ -185,7 +195,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder11.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['sci-fi', 'blockbuster', 'dune'],
   },
   {
@@ -202,7 +213,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder12.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['hoat-hinh', 'pixar', 'gia-dinh'],
   },
   {
@@ -219,7 +231,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder13.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['marvel', 'hanh-dong', 'hai'],
   },
   {
@@ -236,7 +249,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder14.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'hai', 'tam-ly'],
   },
   {
@@ -253,7 +267,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder15.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['oscar', 'nolan', 'lich-su'],
   },
   {
@@ -270,7 +285,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder16.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['hoat-hinh', 'spider-man', 'marvel'],
   },
   {
@@ -287,7 +303,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder17.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'gia-dinh', 'tran-thanh'],
   },
   {
@@ -304,7 +321,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder18.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['dc', 'batman', 'toi-pham'],
   },
   {
@@ -321,7 +339,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder19.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'thieu-nhi'],
   },
   {
@@ -338,7 +357,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder20.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['marvel', 'hanh-dong'],
   },
   {
@@ -355,7 +375,8 @@ const movies = [
     language: ['Tiếng Việt'],
     subtitles: ['Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder21.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['phim-viet', 'lich-su', 'tinh-cam'],
   },
   {
@@ -372,7 +393,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder22.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['gia-dinh', 'phieu-luu'],
   },
   {
@@ -389,7 +411,8 @@ const movies = [
     language: ['Tiếng Hàn'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder23.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['kinh-di', 'han-quoc'],
   },
   {
@@ -406,7 +429,8 @@ const movies = [
     language: ['Tiếng Anh'],
     subtitles: ['Tiếng Việt', 'Tiếng Anh'],
     imageUrl: 'https://image.tmdb.org/t/p/w500/placeholder24.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=placeholder',
+    trailerUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     tags: ['monster', 'hanh-dong', 'blockbuster'],
   },
 ];
