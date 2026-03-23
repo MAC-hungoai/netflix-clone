@@ -523,7 +523,7 @@ const Billboard: React.FC = () => {
   if (!randomMovie) return null;
 
   return (
-    <section className="relative h-[100svh] min-h-screen">
+    <section className="relative h-[65vh] md:h-[70vh] lg:h-[75vh]">
       <div className="relative h-full w-full overflow-hidden">
         {useContainForPoster && (
           <img
