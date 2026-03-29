@@ -7,7 +7,7 @@ export const WEB_API_URL =
 
 export const BACKEND_API_URL =
   process.env.NEXT_PUBLIC_BACKEND_API_URL ||
-  'http://localhost:5000';
+  'http://localhost:3001';
 
 const api = axios.create({
   baseURL: WEB_API_URL,
@@ -64,10 +64,10 @@ export interface PaginatedResponse {
 
 export const movieApi = {
   getAll: (params?: Record<string, any>) =>
-    api.get<PaginatedResponse>('/api/movies', { params }).then((r) => r.data),
+    movieApiClient.get<PaginatedResponse>('/api/movies', { params }).then((r) => r.data),
 
   getById: (id: string) =>
-    api.get<Movie>(`/api/movies/${id}`).then((r) => r.data),
+    movieApiClient.get<Movie>(`/api/movies/${id}`).then((r) => r.data),
 
   create: (data: Partial<Movie>) =>
     movieApiClient.post<Movie>('/api/movies', data).then((r) => r.data),
@@ -82,7 +82,7 @@ export const movieApi = {
     movieApiClient.patch<Movie>(`/api/movies/${id}/status`, { status }).then((r) => r.data),
 
   search: (q: string) =>
-    api.get<Movie[]>('/api/movies/search', { params: { q } }).then((r) => r.data),
+    movieApiClient.get<Movie[]>('/api/movies/search', { params: { q } }).then((r) => r.data),
 
   checkSlug: (slug: string, excludeId?: string) =>
     movieApiClient.get<{ available: boolean; slug: string }>('/api/movies/check-slug', {

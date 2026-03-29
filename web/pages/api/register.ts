@@ -30,12 +30,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    const defaultAvatars = [
+      "/images/default-blue.png",
+      "/images/default-green.png",
+      "/images/default-red.png",
+      "/images/default-slate.png",
+    ];
+    const randomAvatar = defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
+
     const user = await prisma.user.create({
       data: {
         email,
         name,
         hashedPassword,
-        image: '',
+        image: randomAvatar,
         emailVerified: new Date(),
       }
     })

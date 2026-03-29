@@ -3,24 +3,27 @@ import { useRouter } from "next/router";
 
 interface NavbarItemProps {
     label: string;
+    href?: string;
 }
 
-const NavbarItem: React.FC<NavbarItemProps> = ({label}) => {
+const NavbarItem: React.FC<NavbarItemProps> = ({label, href}) => {
     const router = useRouter();
     
     const getHref = () => {
+        if (href) return href;
+        
         switch(label) {
-            case "Home":
+            case "Trang chủ":
                 return "/";
-            case "Series":
+            case "Phim bộ":
                 return "/series";
-            case "Films":
+            case "Phim lẻ":
                 return "/films";
-            case "New & Popular":
+            case "Mới & Phổ biến":
                 return "/new";
-            case "My List":
+            case "Danh sách của tôi":
                 return "/my-list";
-            case "Browse by Languages":
+            case "Theo ngôn ngữ":
                 return "/languages";
             default:
                 return "/";

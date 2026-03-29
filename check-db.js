@@ -1,7 +1,7 @@
 // Check MongoDB movies data
 const { MongoClient } = require('mongodb');
 
-const MONGODB_URL = 'mongodb+srv://tranhungoai6_db_user:Huutinh1905A@cluster0.gc8pfyr.mongodb.net/netflix?retryWrites=true&w=majority';
+const MONGODB_URL = 'mongodb+srv://khoa030577_db_user:Dangkhoa3525@cluster.yc1srse.mongodb.net/netflix?retryWrites=true&w=majority';
 
 async function checkMovies() {
   const client = new MongoClient(MONGODB_URL);

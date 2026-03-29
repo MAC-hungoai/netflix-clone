@@ -5,6 +5,7 @@ import type { NextPage } from 'next'
 import { getProviders, signIn } from "next-auth/react"
 import { useRouter } from "next/router";
 import Input from "../components/input";
+import Footer from "../components/Footer";
 
 import {FcGoogle} from 'react-icons/fc';
 import {FaGithub} from "react-icons/fa"
@@ -275,6 +276,7 @@ const Auth: NextPage = () => {
                 </div>
             </div>
         </div>
+        <Footer />
         </>
 
     );

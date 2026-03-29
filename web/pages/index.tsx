@@ -19,6 +19,7 @@ import Billboard from "../components/Billboard";
 import MovieList from "../components/MovieList";
 import InfoModal from "../components/InfoModal";
 import IntroN from "../components/IntroN";
+import Footer from "../components/Footer";
 
 const BRAND_INTRO_URL = getBrandIntroUrl();
 const parsedBrandIntroDurationMs = Number(
@@ -58,9 +59,8 @@ const Home: NextPage<HomePageProps> = ({ showIntroOnLoad }) => {
   const [showIntro, setShowIntro] = useState(showIntroOnLoad);
   const [introResolved, setIntroResolved] = useState(showIntroOnLoad);
   const prevShowIntroOnLoadRef = useRef(showIntroOnLoad);
-  // Always fetch data after intro resolves, even if showing intro
-  // This way movies load in background while intro plays
-  const shouldFetchHomeData = introResolved;
+  // Always fetch data so we can have movie videos for the intro
+  const shouldFetchHomeData = true;
 
   // Calculate introIsMuted immediately (not using useEffect to avoid timing issue)
   const introIsMuted = useMemo(() => {
@@ -95,6 +95,15 @@ const Home: NextPage<HomePageProps> = ({ showIntroOnLoad }) => {
   const { data: currentUser } = useCurrentUser(shouldFetchHomeData);
   const { data: moviesList = [], isLoading: moviesLoading, error: moviesError } = useMovieList(shouldFetchHomeData);
   const { data: favorites = [] } = useFavorites(shouldFetchHomeData);
+
+  // Get latest 5 movie videos for the intro playlist (No longer used for intro, but kept if needed elsewhere)
+  const introVideoUrls = useMemo(() => {
+    if (!moviesList || moviesList.length === 0) return [];
+    return moviesList
+      .slice(0, 5) 
+      .map(m => m.videoUrl || m.movieUrl || m.trailerUrl)
+      .filter(Boolean) as string[];
+  }, [moviesList]);
 
   const toMovieState = (movie: MovieItem): movieState => ({
     id: String(movie.id ?? movie._id ?? ""),
@@ -180,12 +189,6 @@ const Home: NextPage<HomePageProps> = ({ showIntroOnLoad }) => {
     prevShowIntroOnLoadRef.current = showIntroOnLoad;
   }, [showIntroOnLoad]);
 
-  useEffect(() => {
-    if (!showIntro) return;
-    const timer = window.setTimeout(() => hideIntro(), INTRO_DURATION_MS);
-    return () => window.clearTimeout(timer);
-  }, [hideIntro, showIntro]);
-
   if (!introResolved) {
     return <div className="w-screen h-screen bg-black" />;
   }
@@ -236,6 +239,7 @@ const Home: NextPage<HomePageProps> = ({ showIntroOnLoad }) => {
         <MovieList title="Trending Now" data={moviesList} />
         <MovieList title="My List" data={favorites} />
       </div>
+      <Footer />
     </>
   );
 };

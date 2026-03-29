@@ -6,6 +6,7 @@ interface IntroNProps {
   imageSrc?: string;
   alt?: string;
   videoUrl?: string;
+  videoUrls?: string[]; // New prop for playlist
   preferVideo?: boolean;
   onFinished?: () => void;
   finishAfterMs?: number;
@@ -148,16 +149,30 @@ const IntroN: React.FC<IntroNProps> = ({
   imageSrc = "/images/loading.gif",
   alt = "Nextlix intro",
   videoUrl,
+  videoUrls = [],
   preferVideo = false,
   onFinished,
   finishAfterMs = 0,
   isMuted,
 }) => {
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  
+  // Combine videoUrl and videoUrls into a single playlist
+  const playlist = useMemo(() => {
+    const list = [...videoUrls];
+    if (videoUrl && !list.includes(videoUrl)) {
+      list.unshift(videoUrl);
+    }
+    return list.filter(Boolean);
+  }, [videoUrl, videoUrls]);
+
+  const currentVideoUrl = playlist[currentVideoIndex] || videoUrl;
+
   const shouldMuteIntro = isMuted ?? (INTRO_MUTED || INTRO_AUTOPLAY_MUTED);
-  const introSource = useMemo(() => resolveIntroSource(videoUrl, shouldMuteIntro), [videoUrl, shouldMuteIntro]);
+  const introSource = useMemo(() => resolveIntroSource(currentVideoUrl, shouldMuteIntro), [currentVideoUrl, shouldMuteIntro]);
   const showDirectIntro = Boolean(preferVideo && introSource?.type === "direct");
   const showYoutubeIntro = Boolean(preferVideo && introSource?.type === "youtube");
-  const showNOnlyIntro = !showDirectIntro && !showYoutubeIntro;
+  const showNOnlyIntro = !showDirectIntro && !showYoutubeIntro && playlist.length === 0;
   const directIntroSrc = introSource?.type === "direct" ? introSource.src : "";
   const youtubeIntroSrc = introSource?.type === "youtube" ? introSource.src : "";
   const safeFinishAfterMs = Number.isFinite(finishAfterMs) ? Math.max(0, Math.floor(finishAfterMs)) : 0;
@@ -168,15 +183,20 @@ const IntroN: React.FC<IntroNProps> = ({
   const [hideYoutubeSurface, setHideYoutubeSurface] = useState(false);
 
   const finishIntro = useCallback(() => {
+    if (currentVideoIndex < playlist.length - 1) {
+      setCurrentVideoIndex((prev) => prev + 1);
+      return;
+    }
+
     if (!onFinished || finishCalledRef.current) return;
     finishCalledRef.current = true;
     onFinished();
-  }, [onFinished]);
+  }, [currentVideoIndex, playlist.length, onFinished]);
 
   useEffect(() => {
     finishCalledRef.current = false;
     setHideYoutubeSurface(false);
-  }, [videoUrl, preferVideo, showDirectIntro, showYoutubeIntro, showNOnlyIntro]);
+  }, [currentVideoUrl, preferVideo, showDirectIntro, showYoutubeIntro, showNOnlyIntro]);
 
   const sendYoutubeCommand = useCallback((func: string, args: unknown[] = []) => {
     const frame = youtubeFrameRef.current;
@@ -264,16 +284,19 @@ const IntroN: React.FC<IntroNProps> = ({
   useEffect(() => {
     if (!onFinished) return;
     if (fallbackFinishAfterMs <= 0) {
-      if (!showDirectIntro) finishIntro();
+      if (!showDirectIntro && !showYoutubeIntro) finishIntro();
       return;
     }
 
+    // Reset and start timer for the CURRENT video in the playlist
     const timer = window.setTimeout(() => {
-      setHideYoutubeSurface(true);
+      // If we are in a playlist, this will move to next video
+      // If it's the last video, it will call onFinished
       finishIntro();
     }, fallbackFinishAfterMs);
+    
     return () => window.clearTimeout(timer);
-  }, [fallbackFinishAfterMs, finishIntro, onFinished, showDirectIntro]);
+  }, [fallbackFinishAfterMs, finishIntro, onFinished, showDirectIntro, showYoutubeIntro, currentVideoIndex]);
 
   useEffect(() => {
     if (!showDirectIntro) return;

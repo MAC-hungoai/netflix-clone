@@ -9,12 +9,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({visible}) => {
     const router = useRouter();
     
     const menuItems = [
-        { label: "Home", href: "/" },
-        { label: "Series", href: "/series" },
-        { label: "Films", href: "/films" },
-        { label: "New & Popular", href: "/new" },
-        { label: "My list", href: "/my-list" },
-        { label: "Browse by language", href: "/languages" },
+        { label: "Trang chủ", href: "/" },
+        { label: "Phim bộ", href: "/series" },
+        { label: "Phim lẻ", href: "/films" },
+        { label: "Mới & Phổ biến", href: "/new" },
+        { label: "Danh sách của tôi", href: "/my-list" },
+        { label: "Theo ngôn ngữ", href: "/languages" },
     ];
 
     const handleClick = (href: string) => {

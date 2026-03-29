@@ -12,16 +12,34 @@ import { useAppSelector } from "../store/index";
 const Navbar: React.FC = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [searching, setSearching] = useState(false);
+  
+  const categoriesRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();
   const currentUser = useAppSelector((state) => state.profile.profile);
   const headerAvatarSrc = getHeaderAvatarSrc(currentUser?.image);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (categoriesRef.current && !categoriesRef.current.contains(event.target as Node)) {
+        setShowCategories(false);
+      }
+    };
+
+    if (showCategories) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showCategories]);
 
   useEffect(() => {
     return () => {
@@ -41,6 +59,10 @@ const Navbar: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [router.asPath]);
+
+  const toggleCategories = useCallback(() => {
+    setShowCategories((prev) => !prev);
+  }, []);
 
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((prev) => !prev);
@@ -117,12 +139,44 @@ const Navbar: React.FC = () => {
         <img className="h-4 lg:h-7" src="/images/logo.png" alt="logo" />
 
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
-          <NavbarItem label="Home" />
-          <NavbarItem label="Series" />
-          <NavbarItem label="Films" />
-          <NavbarItem label="New & Popular" />
-          <NavbarItem label="My List" />
-          <NavbarItem label="Browse by Languages" />
+          <NavbarItem label="Trang chủ" />
+          <NavbarItem label="Phim bộ" />
+          <NavbarItem label="Phim lẻ" />
+          
+          <div className="relative" ref={categoriesRef}>
+            <div 
+              onClick={toggleCategories}
+              className="text-white/90 hover:text-red-500 cursor-pointer flex items-center gap-1 transition duration-200"
+            >
+              Thể loại <BsChevronDown className={`text-xs transition ${showCategories ? "rotate-180" : "rotate-0"}`} />
+            </div>
+            {showCategories && (
+              <div className="absolute top-full left-0 mt-2 w-[480px] bg-black/95 border border-zinc-800 p-4 rounded-md shadow-2xl grid grid-cols-4 gap-2 z-50">
+                {[
+                  "Hành động", "Hài", "Tình cảm", "Kinh dị", "Tâm linh", "Tâm lý", 
+                  "Khoa học viễn tưởng", "Hoạt hình", "Gia đình", "Tội phạm", 
+                  "Bí ẩn", "Lịch sử", "Chiến tranh", "Tiểu sử", "Chính kịch", 
+                  "Thể thao", "Trinh thám", "Viễn tưởng", "Thần thoại", 
+                  "Cổ trang", "Học đường", "Kinh điển"
+                ].map((genre) => (
+                  <div 
+                    key={genre}
+                    onClick={() => {
+                      setShowCategories(false);
+                      router.push(`/category?genre=${encodeURIComponent(genre)}`);
+                    }}
+                    className="text-gray-400 hover:text-white text-sm py-1 cursor-pointer transition"
+                  >
+                    {genre}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <NavbarItem label="Mới & Phổ biến" />
+          <NavbarItem label="Danh sách của tôi" />
+          <NavbarItem label="Theo ngôn ngữ" />
         </div>
 
         <div

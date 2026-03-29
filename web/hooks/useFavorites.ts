@@ -5,6 +5,32 @@ import type { MovieItem } from "./useMovieList";
 import useCurrentUser from "./useCurrentUser";
 import useMovieList from "./useMovieList";
 
+const FALLBACK_POSTER = "/images/poster.png";
+
+const normalizeImageUrl = (raw?: string) => {
+  if (!raw || typeof raw !== "string") return FALLBACK_POSTER;
+  if (raw.startsWith("http://") || raw.startsWith("https://")) return raw;
+  if (raw.startsWith("/")) return raw;
+  return `/${raw}`;
+};
+
+const normalizeMovie = (m: MovieItem): MovieItem => {
+  const thumb =
+    m.thumbnailUrl ||
+    m.thumbnail_url ||
+    m.posterUrl ||
+    m.imageUrl ||
+    m.backdropUrl ||
+    m.image ||
+    FALLBACK_POSTER;
+  const id = String(m.id ?? m._id ?? "");
+  return {
+    ...m,
+    id,
+    thumbnailUrl: normalizeImageUrl(thumb),
+  };
+};
+
 const useFavorites = (enabled = true) => {
   const { data: currentUser } = useCurrentUser(enabled);
   const { data: movieList = [] } = useMovieList(enabled);
@@ -29,7 +55,9 @@ const useFavorites = (enabled = true) => {
   }, [currentUser, movieList]);
 
   const favorites = useMemo(() => {
-    if (Array.isArray(data) && data.length > 0) return data;
+    if (Array.isArray(data) && data.length > 0) {
+      return data.map(normalizeMovie);
+    }
     return fallbackFavorites;
   }, [data, fallbackFavorites]);
 

@@ -14,7 +14,10 @@ import useCurrentUser from "../../hooks/useCurrentUser";
 import { getBrandIntroUrl } from "../../libs/brandIntro";
 import AccountMenu from "../../components/AccountMenu";
 import CommentSection from "../../components/CommentSection";
+import HorizontalMovieList from "../../components/HorizontalMovieList";
 import IntroN from "../../components/IntroN";
+import useMovieList from "../../hooks/useMovieList";
+import useFavorites from "../../hooks/useFavorites";
 import { buildWatchPath, getWatchIntroAudioIntentKey, navigateToWatch } from "../../libs/watchNavigation";
 
 type RatingApiResponse = {
@@ -422,7 +425,29 @@ const WatchPage = () => {
   const validMovieId = movieId && movieId.trim() !== "" ? movieId : null;
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { data: movie, isLoading } = useMovie(validMovieId || "");
+  const { data: allMovies = [] } = useMovieList();
+  const { data: favorites = [] } = useFavorites();
   const isTrailerMode = mode === "trailer";
+
+  const recommendedMoviesRef = useRef<any[]>([]);
+  const lastShuffleMovieIdRef = useRef<string | null>(null);
+
+  const recommendedMovies = useMemo(() => {
+    if (allMovies.length === 0) return [];
+    
+    // If we already have a list for this movie, keep it
+    if (lastShuffleMovieIdRef.current === validMovieId && recommendedMoviesRef.current.length > 0) {
+      return recommendedMoviesRef.current;
+    }
+
+    const filtered = allMovies.filter(m => String(m.id) !== String(validMovieId));
+    const shuffled = [...filtered].sort(() => 0.5 - Math.random()).slice(0, 10);
+    
+    recommendedMoviesRef.current = shuffled;
+    lastShuffleMovieIdRef.current = validMovieId;
+    
+    return shuffled;
+  }, [allMovies, validMovieId]);
 
   const movieUrl = useMemo(() => pickFirstNonEmptyString(movie, ["videoUrl", "movieUrl", "video_url"]), [movie]);
   const trailerUrl = useMemo(() => pickFirstNonEmptyString(movie, ["trailerUrl", "trailer_url"]), [movie]);
@@ -1515,12 +1540,12 @@ const WatchPage = () => {
               <img src="/images/logo.png" alt="logo" className="h-5 sm:h-8" />
             </Link>
             <div className="hidden lg:flex items-center ml-8 gap-7 text-sm text-white/90">
-              <Link href="/" className={watchNavLinkClass}>Home</Link>
-              <Link href="/series" className={watchNavLinkClass}>Series</Link>
-              <Link href="/films" className={watchNavLinkClass}>Films</Link>
-              <Link href="/new" className={watchNavLinkClass}>New & Popular</Link>
-              <Link href="/my-list" className={watchNavLinkClass}>My List</Link>
-              <Link href="/languages" className={watchNavLinkClass}>Browse by Languages</Link>
+              <Link href="/" className={watchNavLinkClass}>Trang chủ</Link>
+              <Link href="/series" className={watchNavLinkClass}>Phim bộ</Link>
+              <Link href="/films" className={watchNavLinkClass}>Phim lẻ</Link>
+              <Link href="/new" className={watchNavLinkClass}>Mới & Phổ biến</Link>
+              <Link href="/my-list" className={watchNavLinkClass}>Danh sách của tôi</Link>
+              <Link href="/languages" className={watchNavLinkClass}>Theo ngôn ngữ</Link>
             </div>
             <div className="lg:hidden ml-4">
               <Link href="/" className="text-white/90 hover:text-red-500 text-sm transition-all duration-200 transform-gpu will-change-transform origin-left inline-block hover:[transform:perspective(720px)_translate3d(0,-6px,42px)_scale(1.15)] hover:[text-shadow:0_8px_20px_rgba(239,68,68,0.45)]">Home</Link>
@@ -1915,6 +1940,8 @@ const WatchPage = () => {
         <div ref={commentAnchorRef}>
           {movieId && <CommentSection movieId={movieId} />}
         </div>
+        <HorizontalMovieList title="Phim dành cho bạn" data={recommendedMovies} />
+        <HorizontalMovieList title="My List" data={favorites} />
       </div>
       </div>
     </>
