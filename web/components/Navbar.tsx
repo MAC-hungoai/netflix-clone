@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
       >
         <img className="h-4 lg:h-7" src="/images/logo.png" alt="logo" />
 
-        <div className="flex-row ml-8 gap-7 hidden lg:flex">
+        <div className="flex-row ml-8 items-center bg-black/40 backdrop-blur-md rounded-full px-2 py-1 gap-1 hidden lg:flex border border-white/10">
           <NavbarItem label="Trang chủ" />
           <NavbarItem label="Phim bộ" />
           <NavbarItem label="Phim lẻ" />
@@ -146,12 +146,20 @@ const Navbar: React.FC = () => {
           <div className="relative" ref={categoriesRef}>
             <div 
               onClick={toggleCategories}
-              className="text-white/90 hover:text-red-500 cursor-pointer flex items-center gap-1 transition duration-200"
+              className={`
+                relative px-4 py-2 cursor-pointer transition-colors duration-200 flex items-center gap-1
+                ${showCategories ? "text-white" : "text-white/60 hover:text-white"}
+              `}
             >
-              Thể loại <BsChevronDown className={`text-xs transition ${showCategories ? "rotate-180" : "rotate-0"}`} />
+              <span className="relative z-10 text-sm font-medium flex items-center gap-1">
+                Thể loại <BsChevronDown className={`text-xs transition ${showCategories ? "rotate-180" : "rotate-0"}`} />
+              </span>
+              {showCategories && (
+                <div className="absolute inset-0 bg-white/10 rounded-full" />
+              )}
             </div>
             {showCategories && (
-              <div className="absolute top-full left-0 mt-2 w-[480px] bg-black/95 border border-zinc-800 p-4 rounded-md shadow-2xl grid grid-cols-4 gap-2 z-50">
+              <div className="absolute top-full left-0 mt-4 w-[480px] bg-black/95 backdrop-blur-xl border border-zinc-800 p-4 rounded-2xl shadow-2xl grid grid-cols-4 gap-2 z-50">
                 {[
                   "Hành động", "Hài", "Tình cảm", "Kinh dị", "Tâm linh", "Tâm lý", 
                   "Khoa học viễn tưởng", "Hoạt hình", "Gia đình", "Tội phạm", 

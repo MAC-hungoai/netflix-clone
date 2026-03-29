@@ -39,8 +39,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, onClick }) => {
         group relative w-full overflow-hidden rounded-lg
         aspect-[2/3] bg-zinc-900
         focus:outline-none focus:ring-2 focus:ring-white/60
-        transition-transform duration-300 ease-out
+        transition-all duration-300 ease-out
         hover:scale-105 hover:z-10
+        border-2 border-transparent hover:border-white
+        shadow-[0_0_0_1px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]
       "
     >
       <img

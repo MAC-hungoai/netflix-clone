@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 interface NavbarItemProps {
     label: string;
@@ -41,12 +42,20 @@ const NavbarItem: React.FC<NavbarItemProps> = ({label, href}) => {
         <div
             onClick={handleClick}
             className={`
-                cursor-pointer inline-block origin-left transform-gpu will-change-transform transition-all duration-200
-                ${isActive ? "text-red-500 font-semibold" : "text-white/90"}
-                hover:text-red-500 hover:[transform:perspective(720px)_translate3d(0,-6px,56px)_scale(1.15)] hover:[text-shadow:0_8px_20px_rgba(239,68,68,0.45)]
+                relative px-4 py-2 cursor-pointer transition-colors duration-200
+                ${isActive ? "text-white" : "text-white/60 hover:text-white"}
             `}
         >
-           {label}
+            <span className="relative z-10 text-sm font-medium">
+                {label}
+            </span>
+            {isActive && (
+                <motion.div
+                    layoutId="active-pill"
+                    className="absolute inset-0 bg-white/10 rounded-full"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+            )}
         </div>
     )
 }
