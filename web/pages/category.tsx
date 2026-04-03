@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { GetServerSidePropsContext } from "next-auth";
+import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { useRouter } from "next/router";
 import { authOptions } from "../libs/authOptions";
